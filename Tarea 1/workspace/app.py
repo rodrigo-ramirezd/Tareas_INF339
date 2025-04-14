@@ -15,10 +15,10 @@ def main():
     ConvertCsvToAvro().convert(file, "output", "null")
     ConvertCsvToAvro().convert(file, "output", "deflate")
     ConvertCsvToAvro().convert(file, "output", "snappy")
-    ConvertCsvToParquet().convert(file, "output", "NONE")
-    ConvertCsvToParquet().convert(file, "output", "SNAPPY")
-    ConvertCsvToParquet().convert(file, "output", "GZIP")
-    ConvertCsvToParquet().convert(file, "output", "LZ4")
+    #ConvertCsvToParquet().convert(file, "output", "NONE")
+    #ConvertCsvToParquet().convert(file, "output", "SNAPPY")
+    #ConvertCsvToParquet().convert(file, "output", "GZIP")
+    #ConvertCsvToParquet().convert(file, "output", "LZ4")
 
 if __name__ == "__main__": 
   main()
