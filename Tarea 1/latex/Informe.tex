@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+%----------Preambulo----------%
+\title{Analisis de conversion de archivos con y sin compresión}
+\author{Rodrigo Ignacio Ramírez Díaz}
+\date{\today}
+
+%----------El entorno----------%
+\begin{document}
+	\maketitle
+	
+	\section{Analisis temporal de conversion y compresion de arcvhivos}
+	
+		Para el análisis temporal se cuenta con la siguiente \ref{tab:avro_parquet}, la cual contiene el tiempo que se demora en transformar los archivos CSV a formato AVRO o Parquet, teniendo com variacion el procentaje de datos a transformar del dataset y original y si la conversion es o no con algun formato de compresión.
+		
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{|c|ccc|cccc|}
+				\hline
+				\textbf{\% datos} & \multicolumn{3}{c|}{\textbf{Avro}} & \multicolumn{4}{c|}{\textbf{Parquet}} \\ \hline
+				& \textbf{Sin comprimir} & \textbf{Deflate} & \textbf{Snappy} & \textbf{Sin comprimir} & \textbf{Snappy} & \textbf{Gzip} & \textbf{LZ4} \\ \hline
+				1\% & 0{,}08 & 0{,}04 & 0{,}05 & 0{,}09 & 0{,}06 & 0{,}04 & 0{,}06 \\
+				10\% & 0{,}79 & 0{,}41 & 0{,}52 & 0{,}67 & 0{,}46 & 0{,}37 & 0{,}48 \\
+				20\% & 1{,}97 & 1{,}03 & 1{,}29 & 1{,}40 & 1{,}02 & 0{,}83 & 1{,}06 \\
+				50\% & 3{,}94 & 2{,}05 & 2{,}58 & 2{,}45 & 1{,}89 & 1{,}57 & 1{,}96 \\
+				100\% & 7{,}88 & 3{,}48 & 4{,}63 & 4{,}06 & 3{,}14 & 2{,}49 & 3{,}15 \\ \hline
+			\end{tabular}
+			\caption{Comparación de tamaños de archivo (MB) en Avro y Parquet bajo distintos porcentajes de datos y métodos de compresión.}
+			\label{tab:avro_parquet}
+		\end{table}
+		
+	
+		\subsection{Formato de archivo CSV a AVRO}
+		\subsection{Formato de archivo CSV a Parquet}
+	
+	\section{Preguntas}
+		\begin{enumerate}
+			\item ¿Qué conclusiones puede obtener de los resultados anteriores?
+			
+			ondocsndc
+			
+			\item Basado en los resultados: ¿Qué combinación (formato/compresión) elegiría
+			para almacenar el dataset en un data lake en la nube? Justifique su respuesta.
+			\item ¿Cual fue el principal desafío para desarrollar la presente tarea?
+		\end{enumerate}
+		
+\end{document}
