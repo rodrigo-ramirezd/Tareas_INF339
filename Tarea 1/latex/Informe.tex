@@ -1,48 +1,90 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pgfplotstable}
+\usepackage{graphicx}
 
 %----------Preambulo----------%
-\title{Analisis de conversion de archivos con y sin compresión}
+\title{Análisis de Conversión de Archivos con y sin Compresión}
 \author{Rodrigo Ignacio Ramírez Díaz}
 \date{\today}
 
-%----------El entorno----------%
+%----------Documento----------%
 \begin{document}
 	\maketitle
 	
-	\section{Analisis temporal de conversion y compresion de arcvhivos}
+	\section{Análisis Temporal de Conversión y Compresión de Archivos}
 	
-		Para el análisis temporal se cuenta con la siguiente \ref{tab:avro_parquet}, la cual contiene el tiempo que se demora en transformar los archivos CSV a formato AVRO o Parquet, teniendo com variacion el procentaje de datos a transformar del dataset y original y si la conversion es o no con algun formato de compresión.
-		
-		\begin{table}[h!]
+	Para el análisis temporal se cuenta con la Tabla~\ref{tab:avro_parquet}, la cual muestra el tiempo requerido para convertir archivos CSV a los formatos AVRO y Parquet. Las variables consideradas son el porcentaje de datos del dataset original a transformar y la utilización o no de métodos de compresión.
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{|c|ccc|cccc|}
+			\hline
+			\textbf{\% Datos} & \multicolumn{3}{c|}{\textbf{Avro}} & \multicolumn{4}{c|}{\textbf{Parquet}} \\ \hline
+			& \textbf{Sin comprimir} & \textbf{Deflate} & \textbf{Snappy} & \textbf{Sin comprimir} & \textbf{Snappy} & \textbf{Gzip} & \textbf{LZ4} \\ \hline
+			1\%   & 0,08 & 0,04 & 0,05 & 0,09 & 0,06 & 0,04 & 0,06 \\
+			10\%  & 0,79 & 0,41 & 0,52 & 0,67 & 0,46 & 0,37 & 0,48 \\
+			20\%  & 1,97 & 1,03 & 1,29 & 1,40 & 1,02 & 0,83 & 1,06 \\
+			50\%  & 3,94 & 2,05 & 2,58 & 2,45 & 1,89 & 1,57 & 1,96 \\
+			100\% & 7,88 & 3,48 & 4,63 & 4,06 & 3,14 & 2,49 & 3,15 \\ \hline
+		\end{tabular}
+		\caption{Tiempos de conversión de archivos CSV a Avro y Parquet (en segundos), considerando diferentes porcentajes de datos y métodos de compresión.}
+		\label{tab:avro_parquet}
+	\end{table}
+	
+	\subsection{Conversión de CSV a AVRO}
+	
+		\begin{figure}[h!]
 			\centering
-			\begin{tabular}{|c|ccc|cccc|}
-				\hline
-				\textbf{\% datos} & \multicolumn{3}{c|}{\textbf{Avro}} & \multicolumn{4}{c|}{\textbf{Parquet}} \\ \hline
-				& \textbf{Sin comprimir} & \textbf{Deflate} & \textbf{Snappy} & \textbf{Sin comprimir} & \textbf{Snappy} & \textbf{Gzip} & \textbf{LZ4} \\ \hline
-				1\% & 0{,}08 & 0{,}04 & 0{,}05 & 0{,}09 & 0{,}06 & 0{,}04 & 0{,}06 \\
-				10\% & 0{,}79 & 0{,}41 & 0{,}52 & 0{,}67 & 0{,}46 & 0{,}37 & 0{,}48 \\
-				20\% & 1{,}97 & 1{,}03 & 1{,}29 & 1{,}40 & 1{,}02 & 0{,}83 & 1{,}06 \\
-				50\% & 3{,}94 & 2{,}05 & 2{,}58 & 2{,}45 & 1{,}89 & 1{,}57 & 1{,}96 \\
-				100\% & 7{,}88 & 3{,}48 & 4{,}63 & 4{,}06 & 3{,}14 & 2{,}49 & 3{,}15 \\ \hline
-			\end{tabular}
-			\caption{Comparación de tamaños de archivo (MB) en Avro y Parquet bajo distintos porcentajes de datos y métodos de compresión.}
-			\label{tab:avro_parquet}
-		\end{table}
-		
+			\includegraphics[width=0.7\linewidth]{./images/ditribucion_avro}
+			\caption{Distribución de memoria usada en la conversión a formato AVRO bajo distintos métodos de compresión.}
+			\label{fig:ditribucionavro}
+		\end{figure}
 	
-		\subsection{Formato de archivo CSV a AVRO}
-		\subsection{Formato de archivo CSV a Parquet}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{images/tabla_avro}
+			\caption{Comparación tabulada de memoria utilizada en la conversión a formato AVRO.}
+			\label{fig:tablaavro}
+		\end{figure}
 	
+	\clearpage
+	\subsection{Conversión de CSV a Parquet}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{images/ditribucion_parquet}
+			\caption{Distribución de de memoria usada en el formato Parquet bajo distintos métodos de compresión.}
+			\label{fig:ditribucionparquet}
+		\end{figure}
+	
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{images/tabla_parquet}
+			\caption{Comparación tabulada de memoria utilizada en la conversión a formato Parquet.}
+			\label{fig:tablaparquet}
+		\end{figure}
+	
+	\clearpage
 	\section{Preguntas}
-		\begin{enumerate}
-			\item ¿Qué conclusiones puede obtener de los resultados anteriores?
-			
-			ondocsndc
-			
-			\item Basado en los resultados: ¿Qué combinación (formato/compresión) elegiría
-			para almacenar el dataset en un data lake en la nube? Justifique su respuesta.
-			\item ¿Cual fue el principal desafío para desarrollar la presente tarea?
-		\end{enumerate}
+	
+	\begin{enumerate}
+		\item \textbf{¿Qué conclusiones puede obtener de los resultados anteriores?}
 		
+		Respuesta: Considerando únicamente el tamaño de almacenamiento, Deflate se presenta como la opción más eficiente para Avro, y Gzip para Parquet. En ambos formatos, estos métodos de compresión demostraron ser los más compactos en los diferentes porcentajes de datos del dataset original. No obstante, este análisis podría variar si se incorporan métricas de rendimiento y velocidad de consulta para cada tipo de compresión.
+		
+		\item \textbf{Basado en los resultados: ¿Qué combinación (formato/compresión) elegiría para almacenar el dataset en un data lake en la nube? Justifique su respuesta.}
+		
+		Respuesta: Para el formato Avro en un data lake, Snappy sería mi elección prioritaria debido a su mayor velocidad y menor demanda de CPU, lo que podría traducirse en ahorros de costos si la facturación se basa en el tiempo de consulta. En cambio, si el costo se fundamenta solo en el espacio utilizado, Deflate sería preferible, a pesar de su mayor consumo de recursos de hardware para la compresión.
+		
+		Respecto al formato Parquet en un data lake con costos basados en el tiempo de consulta, LZ4 sería la opción más ventajosa. Al observar la gráfica de distribución y la tabla comparativa, el espacio utilizado por LZ4 es prácticamente idéntico al de Snappy, pero con una velocidad de compresión y descompresión significativamente mayor, lo que optimizaría los tiempos de consulta. Por otro lado, si el costo se basa en el espacio de almacenamiento, Gzip sería la alternativa más eficiente.
+		
+		\item \textbf{¿Cuál fue el principal desafío para desarrollar la presente tarea?}
+		
+		Respuesta: El principal desafío radicó en la elaboración de los esquemas para Avro y Parquet. Fue necesario realizar conversiones complejas debido a la limitación a tipos de datos primitivos. Sin embargo, a pesar de la dificultad inicial, la similitud entre los esquemas facilitó la creación del segundo esquema (Parquet) una vez que el primero (Avro) estuvo definido.
+		
+	\end{enumerate}
+	
 \end{document}
