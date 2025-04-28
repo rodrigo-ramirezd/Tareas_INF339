@@ -1,5 +1,6 @@
 Alumno: Rodrigo Ramírez Díaz<br>
 ROL: 202273526-0
+Repositorio Github tarea 1: https://github.com/rodrigo-ramirezd/Tareas_INF339.git
 
 La actividad se divide en dos secciones.  La primera es la carpeta "workspace/", que incluye los esquemas de avro y parquet, además del código para sus funciones que convierten CSV a Avro o CSV a Parquet. Por otro lado, hay una carpeta "latex/", que guarda los documentos en latex para crear el informe en PDF, así como el tamaño de cada archivo, tanto sin comprimir como comprimido.
 
