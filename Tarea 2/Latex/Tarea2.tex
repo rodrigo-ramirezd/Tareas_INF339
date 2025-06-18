@@ -1,0 +1,199 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{amsmath}
+\titleformat{\section}{\Large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection.}{1em}{}
+
+\title{\textbf{Informe de Tarea 2}\\Bases de Datos a Gran Escala}
+\author{Rodrigo Ramírez Díaz\\
+	\texttt{claudio.torresf@usm.cl}}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Objetivo}
+	El objetivo de esta tarea es analizar y comparar productos de dos proveedores de nubes públicas con el fin de elegir la mejor tecnología acorde a las necesidades de la empresa \textit{Data Solutions}.
+	
+	\section{Descripción}
+	\textit{Data Solutions} es una empresa dedicada a la generación de reportes de Recursos Humanos. Debido a su éxito, se encuentra en rápido crecimiento. En este contexto, se busca determinar cuál proveedor de servicios en la nube es el más adecuado para soportar esta nueva etapa.
+	
+	En este informe se investigarán y compararán dos proveedores líderes de servicios en la nube, analizando servicios claves en áreas como cómputo, almacenamiento y machine learning.
+	
+	\section{Actividades}
+	
+	\subsection{Selección de proveedores y servicios}
+	Los proveedores seleccionados son:
+	
+	\begin{itemize}
+		\item Proveedor 1: \textbf{Amazon Web Services}
+		\item Proveedor 2: \textbf{Microsoft Azure}
+	\end{itemize}
+	
+	A continuación, se listan los servicios que se detallaran y describiran para cada servicio mencionado anteriormente:
+	
+	\begin{enumerate}[label=\arabic*.]
+		\item \textbf{Plataforma de Machine Learning con soporte para Jupyter Notebooks}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			AWS ofrece el servicio llamado SageMaker, una plataforma completamente gestionada para el desarrollo, entrenamiento e implementación de modelos de Machine Learning. SageMaker permite a los usuarios trabajar directamente en entornos compatibles con Jupyter Notebooks, facilitando la creación y experimentación de modelos. Además, ofrece escalabilidad automática y herramientas integradas para la gestión del ciclo de vida del modelo.
+			
+			\item \textbf{Microsoft Azure} \\
+			Microsoft Azure proporciona el servicio Azure Machine Learning, que también incluye soporte para entornos de desarrollo como Jupyter Notebooks. Sin embargo, el acceso inicial a estos recursos puede requerir una configuración más detallada. A pesar de ello, ofrece una plataforma potente con herramientas automatizadas para entrenamiento de modelos, control de versiones y despliegue en producción, ideal para equipos más experimentados.
+		\end{itemize}
+		
+		\item \textbf{Máquinas Virtuales (VMs)}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			AWS ofrece EC2 (Elastic Compute Cloud), un servicio de máquinas virtuales altamente escalable. Permite elegir entre una amplia variedad de instancias optimizadas para distintos casos de uso, incluyendo cómputo intensivo, memoria alta o almacenamiento rápido. Es ideal para soportar cargas de trabajo variadas y permite ajustar los recursos de forma flexible según la demanda.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure ofrece máquinas virtuales con múltiples configuraciones a través de su servicio Azure Virtual Machines. Este servicio permite lanzar rápidamente instancias bajo demanda o reservarlas a largo plazo para reducir costos. La integración con otras herramientas de Azure facilita la gestión y monitoreo de los recursos.
+		\end{itemize}
+		
+		\item \textbf{Contenedores como Servicio (CaaS)}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			AWS cuenta con Amazon Elastic Kubernetes Service (EKS) y Amazon ECS (Elastic Container Service). Ambos permiten ejecutar contenedores de forma escalable y segura. ECS es una opción más sencilla de configurar, mientras que EKS ofrece mayor control mediante Kubernetes, ideal para entornos más complejos.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure ofrece Azure Kubernetes Service (AKS), una plataforma basada en Kubernetes que facilita el despliegue, la administración y la escalabilidad de aplicaciones en contenedores. AKS está bien integrado con otras herramientas de Azure, lo que permite gestionar la infraestructura desde un solo panel.
+		\end{itemize}
+		
+		\item \textbf{Procesamiento de Datos Batch y Stream Serverless con Apache Beam}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			AWS ofrece AWS Data Pipeline para procesamiento por lotes y Amazon Kinesis para procesamiento de flujos. Sin embargo, para compatibilidad directa con Apache Beam, se recomienda utilizar Amazon EMR (Elastic MapReduce) en combinación con herramientas como Flink o Spark, que pueden ejecutar pipelines de Beam.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure dispone de Azure Data Factory para procesamiento por lotes y Azure Stream Analytics para procesamiento en tiempo real. Aunque Azure no ofrece soporte nativo directo para Apache Beam, es posible integrarlo utilizando Apache Spark sobre Azure Synapse o HDInsight.
+		\end{itemize}
+		
+		\item \textbf{Almacenamiento de Objetos (Object Storage)}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			Amazon S3 es uno de los servicios más populares para almacenamiento de objetos. Ofrece alta durabilidad (99.999999999\%) y escalabilidad automática, además de diversas clases de almacenamiento para optimizar costos según la frecuencia de acceso a los datos.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure Blob Storage es la solución de almacenamiento de objetos de Azure. Permite guardar grandes volúmenes de datos no estructurados y también cuenta con diferentes niveles de acceso (hot, cool, archive) para optimizar costos.
+		\end{itemize}
+		
+		\item \textbf{Data Warehouse}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			Amazon Redshift es el servicio de data warehouse de AWS. Está diseñado para análisis a gran escala de conjuntos de datos estructurados. Se integra bien con herramientas de BI y permite consultas SQL rápidas mediante procesamiento paralelo masivo.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure Synapse Analytics es la solución de Azure para almacenamiento analítico. Permite ejecutar consultas tanto en datos estructurados como no estructurados y se integra con Power BI para generación de reportes interactivos.
+		\end{itemize}
+		
+		\item \textbf{Sistema de Gestión de Bases de Datos Relacionales (RDBMS) compatible con MySQL}
+		\begin{itemize}
+			\item \textbf{Amazon Web Services (AWS)} \\
+			Amazon RDS para MySQL permite desplegar bases de datos relacionales completamente gestionadas, con respaldo automático, escalabilidad y alta disponibilidad. Ofrece monitoreo y recuperación ante fallos sin intervención manual.
+			
+			\item \textbf{Microsoft Azure} \\
+			Azure Database for MySQL es el servicio equivalente de Azure. Permite crear bases de datos compatibles con MySQL con características como copias de seguridad automáticas, escalado vertical y cifrado de datos en reposo y en tránsito.
+		\end{itemize}
+	\end{enumerate}
+	
+	\subsection{Comparación entre servicios}
+	Para cada categoría se presentará una tabla comparativa o párrafo destacando:
+	
+	\begin{itemize}
+		\item Similitudes
+		\item Diferencias
+		\item Modelo de precios (incluyendo posibles costos ocultos y escalabilidad)
+	\end{itemize}
+	
+	\begin{longtable}{|>{\RaggedRight\arraybackslash}p{4cm}|>{\RaggedRight\arraybackslash}p{5cm}|>{\RaggedRight\arraybackslash}p{5cm}|}
+		\hline
+		\textbf{Categoría} & \textbf{Amazon Web Services (AWS)} & \textbf{Microsoft Azure} \\
+		\hline
+		\endfirsthead
+		\multicolumn{3}{c}%
+		{{\bfseries \tablename\ \thetable{} -- continuación}} \\
+		\hline
+		\textbf{Categoría} & \textbf{Amazon Web Services (AWS)} & \textbf{Microsoft Azure} \\
+		\hline
+		\endhead
+		\hline
+		\endfoot
+		
+		\textbf{Machine Learning + Jupyter} & SageMaker: soporte directo para Jupyter, autoescalado, entorno gestionado & Azure Machine Learning: soporte para notebooks, pero con configuración más compleja \\
+		\textit{Similitudes} & Ambos ofrecen entornos gestionados para entrenamiento y despliegue de modelos ML con soporte para Jupyter. & Ambos permiten usar notebooks Jupyter como punto de entrada para modelos ML. \\
+		\textit{Diferencias} & SageMaker es más directo y rápido de usar para principiantes. Mayor integración con pipelines ML de AWS. & Azure ML requiere más configuración inicial, pero se integra bien con otras herramientas empresariales como Power BI. \\
+		\textit{Costos} & Gratis & Pago por uso excediendo \\
+		\hline
+		
+		\textbf{Máquinas Virtuales (VMs)} & EC2: gran variedad de instancias, pago por uso, escalabilidad horizontal/vertical & Azure Virtual Machines: integración con servicios, opciones de reserva para bajar costos \\
+		\textit{Similitudes} & Ofrecen amplia gama de tamaños de instancias, opciones de escalabilidad y pago por uso. & Ambos permiten crear imágenes personalizadas y utilizar autoescalado. \\
+		\textit{Diferencias} & EC2 tiene mayor cantidad de tipos de instancia y opciones avanzadas como spot instances. & Azure se integra mejor con servicios Windows y Active Directory. \\
+		\textit{Costos} & Diversidad de precios bajo demanda o por entrada y salida de datos, en el caso de la demanda, los valores aumentan cada \$0.0042 y \$0.0052 dólares dependiendo de la instancia y la cantidad de GB de RAM que se emplean en el servicio EC2 & Pago por uso: aproximadamente \$10 dólares al mes \\
+		\hline
+		
+		\textbf{Contenedores (CaaS)} & ECS/EKS: ECS más simple, EKS para control avanzado con Kubernetes & AKS: fácil de desplegar, se integra con servicios de Azure, buena documentación \\
+		\textit{Similitudes} & Ambos soportan Kubernetes como motor de orquestación y permiten escalabilidad dinámica. & Integración con pipelines de CI/CD y herramientas de monitoreo. \\
+		\textit{Diferencias} & ECS es propietario de AWS y más simple que EKS, pero menos portable. & AKS usa Kubernetes nativo, con mejor integración para usuarios que ya están en el ecosistema Azure. \\
+		\textit{Costos} & Con el uso de EKS se paga aproximadamente \$0.10 dólares por hora con el cluster en funcionamiento y \$0.60 con EKS en su versión extendida & Al igual que su competencia, al usar AKS se realiza un cobro de \$0.10 dólares por cluster utilizado una hora \\
+		\hline
+		
+		\textbf{Procesamiento Batch/Stream Serverless} & Kinesis + Data Pipeline o Beam en EMR (más configuración) & Stream Analytics + Data Factory. Compatible con Beam vía Spark (Azure Synapse o HDInsight) \\
+		\textit{Similitudes} & Permiten procesamiento de grandes volúmenes de datos en tiempo real o por lotes. Soportan arquitecturas serverless. & Pueden integrarse con Apache Beam indirectamente y escalar automáticamente según demanda. \\
+		\textit{Diferencias} & AWS requiere más configuración para usar Beam con EMR, pero tiene más opciones como Firehose, Lambda, Glue. & Azure simplifica el flujo con Stream Analytics y Data Factory, pero depende más de servicios predefinidos. \\
+		\textit{Costos} & Los costos asociados a EMR, el cual es compatible con Apache Beam, son \textit{"On demand"}, los cuales varían según la CPU virtual que se utilice y la memoria, aumentando en escalas de \$0.17952 dólares por hora aproximadamente. Como dato adicional, AWS ofrece un simulador de los costos que corresponderían según su uso & El costo de Azure Stream Analytics se basa en las unidades de streaming aprovisionadas, el cual también depende del consumo que se acumule en el mes, ej: para un consumo entre 0 - 730 horas, el precio por nodo de streaming equivale a \$0.406 dólares. \\
+		\hline
+		
+		\textbf{Almacenamiento de Objetos} & Amazon S3: 99.999999999\% de durabilidad, múltiples clases (Standard, Glacier, etc.) & Azure Blob Storage: niveles de acceso configurables (Hot, Cool, Archive), cifrado automático \\
+		\textit{Similitudes} & Servicios altamente durables y escalables, con diferentes clases para optimización de costos y rendimiento. & Soporte para almacenamiento no estructurado, API REST, integración con redes CDN. \\
+		\textit{Diferencias} & S3 tiene mayor compatibilidad con servicios de terceros y es más maduro en el ecosistema cloud. & Azure ofrece cifrado habilitado por defecto y mayor integración con el stack de seguridad empresarial. \\
+		\textit{Costos} & S3 ofrecido por AWS tiene diversos planes que varían sus costos dependiendo del tamaño, el tiempo que los almacena durante el mes, entre otros. En el caso de S3 Standard, los primeros 50TB del mes cobran una suma de \$0.023 USD por GB & Al igual que AWS, este proveedor ofrece diferentes planes para Azure Blob Storage, dependiendo de si se realizan accesos frecuentes, esporádicos, se realizan escasos accesos. En el caso del plan premium, se cobran \$0.15 USD por GB \\
+		\hline
+		
+		\textbf{Data Warehouse} & Amazon Redshift: consultas rápidas, altamente escalable, fácil integración con BI & Azure Synapse: consultas SQL y Spark, integración con Power BI, escalado automático \\
+		\textit{Similitudes} & Ambos permiten consultas analíticas de grandes volúmenes de datos con procesamiento distribuido. & Integración con herramientas de visualización y modelado de datos. \\
+		\textit{Diferencias} & Redshift usa un modelo más tradicional basado en nodos. & Synapse ofrece mayor flexibilidad con SQL on-demand y Spark integrado. \\
+		\textit{Costos} & Este servicio provee diferentes formas de pago, como precios bajo demanda, precios por el almacenamiento administrado por Amazon Redshift, entre otras variantes. Por ejemplo, en los precios bajo demanda, cada 2 unidades de vCPU y 16GB de RAM se suma aproximadamente \$0.543 USD & En el caso de utilizar el servicio de Synapse, este se cobra dependiendo de las unidades de confirmación de Synapse (SCU), el cual es una unidad de medida que representa la cantidad de datos replicados desde la base de datos de origen a Azure Synapse Analytics. \\
+		\hline
+		
+		\textbf{RDBMS (MySQL)} & Amazon RDS (MySQL): backups, alta disponibilidad, monitoreo integrado & Azure Database for MySQL: backups, rendimiento configurable, integración con herramientas DevOps \\
+		\textit{Similitudes} & Bases de datos gestionadas, con soporte a backups automáticos, monitoreo y escalado vertical. & Ofrecen compatibilidad total con MySQL 5.x y 8.x. \\
+		\textit{Diferencias} & RDS tiene más años en el mercado, con soporte para múltiples motores (PostgreSQL, Oracle, etc.). & Azure tiene mayor integración con Visual Studio y Azure DevOps. \\
+		\textit{Costos} & En el caso de RDS MySQL en particular el precio bajo demanda, este empieza desde el momento en que se crea o instancia una base de datos, hasta que esta se elimina o detiene, variando los precios entre \$0.016 y \$16.0128 USD & En el caso de los servidores flexibles de Azure MySQL, estos dependerán de los núcleos de CPU virtuales que se tengan y la memoria que ocupe, variando desde \$6.205 USD hasta 992.800 USD al mes (estos son límites de usar escasos recursos proporcionados por Azure, al límite de utilizar la máxima cantidad de recursos proporcionados por estos). \\
+		\hline
+	\end{longtable}
+	
+	
+	\subsection{Conclusiones}
+	
+	A partir del análisis realizado, se evidencia que tanto Amazon Web Services (AWS) como Microsoft Azure ofrecen soluciones robustas, escalables y seguras para los distintos requerimientos tecnológicos de \textit{Data Solutions}. Ambos proveedores cumplen con los criterios clave relacionados con machine learning, procesamiento de datos, infraestructura de cómputo y almacenamiento, siendo líderes consolidados en el mercado de servicios en la nube.
+	
+	AWS destaca por la madurez de sus servicios, la variedad de configuraciones disponibles y la integración fluida entre sus herramientas. Servicios como SageMaker, S3 y EC2 han demostrado ser altamente confiables, ampliamente documentados y adoptados por empresas de alto rendimiento a nivel global. Además, la flexibilidad que ofrece en modalidades de precios como instancias spot y reserved permite adaptar los costos al crecimiento de la empresa.
+	
+	Por otro lado, Microsoft Azure presenta una integración especialmente sólida con entornos empresariales basados en tecnologías Microsoft, como Active Directory, Power BI y Visual Studio. Esto puede ser una ventaja significativa si \textit{Data Solutions} ya trabaja con herramientas de este ecosistema. Azure ofrece también una experiencia de usuario intuitiva y servicios como Synapse Analytics y Azure Machine Learning que destacan por su flexibilidad y escalabilidad.
+	
+	Considerando los requerimientos específicos de \textit{Data Solutions}, centrados en la expansión, el análisis de grandes volúmenes de datos y la experimentación con modelos de machine learning en entornos ágiles como Jupyter, se recomienda optar por **Amazon Web Services** como proveedor principal. AWS ofrece una curva de implementación más rápida en varias de las categorías evaluadas, cuenta con herramientas maduras y bien integradas, y proporciona un modelo de costos competitivo con mayor granularidad y personalización.
+	
+	No obstante, Azure puede ser considerado como alternativa estratégica en caso de requerimientos específicos de integración con herramientas Microsoft o si se prioriza una experiencia de desarrollo enfocada en soluciones empresariales tradicionales.
+	
+	\section{Consideraciones}
+	\begin{itemize}
+		\item Se utilizó inteligencia artificial para la redacción del informe.
+		\item Prompt utilizado: \textit{“Crea un código LaTeX con la estructura para realizar el informe de la Tarea 2 de Bases de Datos a Gran Escala.”}
+		\item Prompt utilizado: \textit{"Mejorar redacción y ortografía"}
+	\end{itemize}
+	
+	
+\end{document}
