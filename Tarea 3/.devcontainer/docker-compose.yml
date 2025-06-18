@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+    depends_on:
+      - kafka
+      - zookeeper
+    networks:
+      - hrl-net
+
+  airflow:
+    image: apache/airflow:2.8.1
+    restart: always
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: sqlite:////workspace/airflow.db
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - .:/workspace
+    command: >
+      bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com && airflow webserver"
+    ports:
+      - "8080:8080"
+    networks:
+      - hrl-net
+    depends_on:
+      - app
+
+  kafka:
+    image: confluentinc/cp-kafka:6.2.12
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - hrl-net
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.2.12
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - hrl-net
+
+networks:
+  hrl-net:
