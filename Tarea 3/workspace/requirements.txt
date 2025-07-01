@@ -1,0 +1,13 @@
+fastavro
+apache-beam[gcp,kafka]
+pyarrow
+pandas
+python-snappy
+confluent-kafka=2.3.0
+minio
+boto3
+Faker
+redis
+psycopg
+grpcio>=1.71.0
+grpcio-status>=1.71.0
